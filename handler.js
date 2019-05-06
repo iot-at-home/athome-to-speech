@@ -4,15 +4,24 @@ const s3 = new AWS.S3({region: 'eu-central-1'});
 
 
 const BUCKET = process.env.BUCKET;
-module.exports.athome = async (event) => {
+const USER = process.env.USER;
+
+
+module.exports.athome = async (event, context) => {
+  let user = USER.split(",");
+  let userdata = [];
+  for (let i=0;i<user.length;i++){
+    let data = await s3.getObject({
+      Bucket: BUCKET,
+      Key: user[i]+'.json'
+    }).promise();
+    userdata.push(JSON.parse(data.Body.toString()));
+  }
+
   return {
     statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    }, null, 2),
+    body: userdata
+    //body: JSON.parse(data.Body.toString())
   };
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 };
+

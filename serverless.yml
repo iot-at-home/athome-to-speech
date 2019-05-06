@@ -32,6 +32,7 @@ functions:
     handler: handler.athome
     environment:
       BUCKET: sambot-athome
+      USER: Nora,Hellboy,Guest1,Guest2
     tags: # Function specific tags
       project: sambot
       sambot: athome
