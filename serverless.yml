@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: athome-to-api # NOTE: update this with your service name
+service: athome-to-speech # NOTE: update this with your service name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -29,7 +29,7 @@ provider:
 
 functions:
   iotclick:
-    handler: handler.athome
+    handler: handler.athome2speech
     environment:
       BUCKET: sambot-athome
       USER: Nora,Hellboy,Guest1,Guest2
