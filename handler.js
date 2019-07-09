@@ -18,9 +18,12 @@ module.exports.athome2speech = async (event, context) => {
     userdata.push(JSON.parse(data.Body.toString()));
   }
   let athome = [];
-  for (let users in userdata){
-    if(users.active === 1){
-      athome.push(users.device);
+  console.log(userdata);
+  for (let i=0;i<userdata.length;i++){
+    console.log("USERS:");
+    console.log(userdata[i]);
+    if(userdata[i].active === '1'){
+      athome.push(userdata[i].device);
     }
   }
   let talk = "";
